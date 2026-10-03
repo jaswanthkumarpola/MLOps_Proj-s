@@ -1,0 +1,28 @@
+import joblib
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+def train_and_save():
+    # Features: [square_footage, bedrooms]
+    X = np.array([
+        [600.0, 1],
+        [850.0, 2],
+        [1200.0, 2],
+        [1500.0, 3],
+        [2000.0, 3],
+        [2500.0, 4]
+    ])
+    
+    # Target prices (in thousands)
+    y = np.array([75000.0, 110000.0, 160000.0, 205000.0, 260000.0, 330000.0])
+
+    model = LinearRegression()
+    model.fit(X, y)
+
+    # Save the serialized artifact into app/
+    artifact_path = "app/model.joblib"
+    joblib.dump(model, artifact_path)
+    print(f"Model trained and saved to {artifact_path}")
+
+if __name__ == "__main__":
+    train_and_save()
